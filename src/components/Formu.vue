@@ -17,7 +17,7 @@
         </form>
         <div v-else>
             <h3 class="m-3">Registro completado con éxito</h3> 
-            <button type="submit" class="btn btn-primary m-3" @click="restore">Reiniciar</button>
+            <button type="submit" class="btn btn-primary m-3" @click="restore">Nuevo Registro</button>
         </div>
         <div class="modal" v-if="cargando">
             <b-spinner/>
@@ -87,8 +87,7 @@ export default {
         retraso: _.debounce (async function(){
             this.cargando = true;
             let response = await fetch("/api/users");
-            let {users} = await response.json();
-            // debugger; // eslint-disable-line no-debugger
+            let {users} = await response.json();            
             if (Array.isArray(users)) {
                 let occurrence = users.some(user => this.usuario === user.usuario);
                 if (occurrence || this.usuario.length < 3) {
